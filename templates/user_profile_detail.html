@@ -1,0 +1,21 @@
+<!-- user_profile_detail.html -->
+
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2>User Profile Detail</h2>
+  <p>Username: {{ user_profile.user.username }}</p>
+  <p>Bio: {{ user_profile.bio }}</p>
+  <p>Wallet Balance: {{ user_profile.wallet_balance }}</p>
+
+  <form method="post" action="{% url 'toggle_user_active' user_id=user_profile.user.id %}">
+    {% csrf_token %}
+    <button type="submit">
+      {% if user_profile.user.is_active %}
+        Deactivate User
+      {% else %}
+        Activate User
+      {% endif %}
+    </button>
+  </form>
+{% endblock %}

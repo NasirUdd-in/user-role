@@ -1,0 +1,14 @@
+<!-- approval.html -->
+<h2>Users Awaiting Approval</h2>
+<ul>
+    {% for user in users_awaiting_approval %}
+        <li>
+            {{ user.username }}
+            <form method="post" action="{% url 'admin_approval' user.id %}">
+                {% csrf_token %}
+                <input type="submit" name="approve" value="Approve">
+                <input type="submit" name="reject" value="Reject">
+            </form>
+        </li>
+    {% endfor %}
+</ul>

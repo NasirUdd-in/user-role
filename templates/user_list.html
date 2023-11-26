@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block content %}
+    <h2>User List</h2>
+    <form method="post" action="{% url 'update_user_is_active' %}">
+        {% csrf_token %}
+        <table>
+            <thead>
+                <tr>
+                    <th>Username</th>
+                    <th>Email</th>
+                    <th>Id</th>
+                    <th>Is Active</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for profile in user_profiles  %}
+                    <tr>
+                        <td>{{ profile.user.username }}</td>
+                        <td>{{ profile.user.email }}</td>
+                        <td>{{profile.user.id}}</td>
+                        <td>
+                            <input type="checkbox" name="user_ids" value="{{ profile.user.id }}" {% if profile.user.is_active %}checked{% endif %}>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <button type="submit">Update Is Active</button>
+    </form>
+{% endblock %}
