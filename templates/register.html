@@ -1,13 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registration</title>
-    <!-- Include Bootstrap CSS -->
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
-</head>
-<body>
+{% extends 'base.html' %}
+{% block content %}
+{% load crispy_forms_tags %}
 
 <div class="container mt-5">
     <div class="row justify-content-center">
@@ -15,7 +8,7 @@
             <h2 class="mb-4">Register</h2>
             <form method="post" action="{% url 'register' %}">
                 {% csrf_token %}
-                {{ form.as_p }}
+                {{ form|crispy }}
                 <button type="submit" class="btn btn-primary">Register</button>
             </form>
             <p class="mt-3">Already have an account? <a href="{% url 'login' %}">Login here</a>.</p>
@@ -23,10 +16,4 @@
     </div>
 </div>
 
-<!-- Include Bootstrap JS and jQuery -->
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-
-</body>
-</html>
+{% endblock content %}

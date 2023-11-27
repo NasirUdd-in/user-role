@@ -1,17 +1,31 @@
+{% extends 'base.html' %}
+{% block content %}
 
-<!DOCTYPE html>
-<html>
-<head>
-    <title>My Posts</title>
-</head>
-<body>
+<div class="container mt-5">
     <h1>My Posts</h1>
     
-    <p>Username: {{ user_details.user.username }}</p>
-    <p>Bio: {{ user_details.bio }}</p>
-    <p>Wallet Balance: ${{ user_details.wallet_balance }}</p>
-    
-    <a href="{% url 'user_data_page' %}">User Data</a>
 
-</body>
-</html>
+    <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Username</th>
+            <th scope="col">Bio</th>
+            <th scope="col">Wallet Balance</th>
+           
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">{{ user.id }}</th>
+            <td>{{ user_details.user.username }}</td>
+            <td>{{ user_details.bio }}</td>
+            <td>${{ user_details.wallet_balance }}</td>
+          </tr>
+         
+          
+        </tbody>
+      </table>
+</div>
+
+{% endblock content %}

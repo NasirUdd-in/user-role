@@ -1,0 +1,30 @@
+<!-- user_details.html -->
+{% extends 'base.html' %}
+
+ {% block content %}
+  <h2>User Details</h2>
+  <p><strong>Username:</strong> {{ user.user.username }}</p>
+  <p><strong>Email:</strong> {{ user.user.email }}</p>
+  <p><strong>Bio:</strong> {{ user.user.is_active }}</p>
+  <p><strong>Bio:</strong> {{ user.bio }}</p>
+  <p><strong>Bio:</strong> {{ user.id }}</p>
+  <!-- Add more details as needed -->
+{% endblock %} 
+
+
+{% comment %} {% extends 'base.html' %}
+
+{% block content %}
+  <h2>Update User Profile</h2>
+  <form method="post" action="{% url 'update_user_profile' user_id=user_id %}">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Update Profile</button>
+  </form>
+{% endblock %} {% endcomment %}
+
+ {% comment %} <form method="post">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <button type="submit">Update</button>
+</form>  {% endcomment %}

@@ -8,7 +8,9 @@
                     <th scope="col">Username</th>
                     <th scope="col">Email</th>
                     <th scope="col">Id</th>
+                    <th scope="col">Status</th>
                     <th scope="col">Update Status</th>
+                    <th scope="col">test</th>
                 </tr>
             </thead>
             <tbody>
@@ -22,7 +24,11 @@
                         <td scope="row">
                             <input type="checkbox" name="user_ids" value="{{ profile.user.id }}" {% if profile.user.is_active %}checked{% endif %}>
                         </td>
+                    
                         <td scope="row"> <button type="submit"  class="btn btn-success">Update</button></td>
+                        <td scope="row">
+                            <a href="{% url 'single_user' user_id=profile.id %}">Details</a>
+                        </td>
                     </tr>
                 </form>
                 {% endfor %}

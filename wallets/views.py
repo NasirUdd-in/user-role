@@ -11,6 +11,9 @@ from django.contrib.auth.models import User
 from django.contrib.auth.decorators import user_passes_test
 
 from django.http import HttpResponseBadRequest
+from django.contrib.auth import logout
+
+# from .forms import CustomUserChangeForm
 
 def register(request):
     if request.method == 'POST':
@@ -90,3 +93,42 @@ def update_user_is_active(request):
             return HttpResponseBadRequest(f"Error updating user status: {str(e)}")
 
     return HttpResponseBadRequest("Invalid request method")
+
+
+
+@login_required
+def single_user(request, user_id):
+    user = get_object_or_404(UserProfile, id=user_id)
+    return render(request, 'single_user.html', {'user': user})
+@login_required
+def user_logout(request):
+    logout(request)
+    return redirect('login') 
+
+
+# def update_user_profile(request, user_id):
+#     user_profile = get_object_or_404(UserProfile, user_id=user_id)
+
+#     if request.method == 'POST':
+#         form = UserProfileForm(request.POST, instance=user_profile)
+#         if form.is_valid():
+#             form.save()
+#             return redirect('user_details', user_id=user_id)  # Redirect to the user details page or another appropriate page
+#     else:
+#         form = UserProfileForm(instance=user_profile)
+
+#     return render(request, 'update_user_profile.html', {'form': form, 'user_id': user_id})
+
+# @login_required
+# def single_user(request, user_id):
+#     user = get_object_or_404(UserProfile, id=user_id)
+
+#     if request.method == 'POST':
+#         form = CustomUserChangeForm(request.POST, instance=user)
+#         if form.is_valid():
+#             form.save()
+#             return redirect('profile')  # Redirect to the user's profile page
+#     else:
+#         form = CustomUserChangeForm(instance=user)
+
+#     return render(request, 'single_user.html', {'form': form, 'user': user})
