@@ -10,7 +10,7 @@
                     <th scope="col">Id</th>
                     <th scope="col">Status</th>
                     <th scope="col">Update Status</th>
-                    <th scope="col">test</th>
+                    <th scope="col">Update</th>
                 </tr>
             </thead>
             <tbody>
@@ -27,7 +27,7 @@
                     
                         <td scope="row"> <button type="submit"  class="btn btn-success">Update</button></td>
                         <td scope="row">
-                            <a href="{% url 'single_user' user_id=profile.user.id %}">Details</a>
+                            <a class="link-success" href="{% url 'single_user' user_id=profile.user.id %}">Upate</a>
                         </td>
                     </tr>
                 </form>

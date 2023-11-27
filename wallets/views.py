@@ -17,7 +17,10 @@ from django.contrib.auth import logout
 
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import UserProfile
-from .forms import UserProfileForm
+from .forms import UserProfileForm, CustomUserForm
+
+
+from django.contrib.auth.forms import UserChangeForm
 
 def register(request):
     if request.method == 'POST':
@@ -138,15 +141,47 @@ def user_logout(request):
 #     return render(request, 'single_user.html', {'form': form, 'user': user})
 
 
+# def single_user(request, user_id):
+#     user_profile = get_object_or_404(UserProfile, user_id=user_id)
+
+#     if request.method == 'POST':
+#         form = UserProfileForm(request.POST, instance=user_profile)
+#         if form.is_valid():
+#             form.save()
+#             return redirect('profile')  # Redirect to the user's profile page
+#     else:
+#         form = UserProfileForm(instance=user_profile)
+
+#     return render(request, 'single_user.html', {'form': form, 'user_profile': user_profile})
+
+# def single_user(request, user_id):
+#     user_profile = get_object_or_404(UserProfile, user_id=user_id)
+
+#     if request.method == 'POST':
+#         user_form = UserChangeForm(request.POST, instance=user_profile.user)
+#         profile_form = UserProfileForm(request.POST, instance=user_profile)
+#         if user_form.is_valid() and profile_form.is_valid():
+#             user_form.save()
+#             profile_form.save()
+#             return redirect('profile')  # Redirect to the user's profile page
+#     else:
+#         user_form = UserChangeForm(instance=user_profile.user)
+#         profile_form = UserProfileForm(instance=user_profile)
+
+#     return render(request, 'single_user.html', {'user_form': user_form, 'profile_form': profile_form, 'user_profile': user_profile})
+
 def single_user(request, user_id):
     user_profile = get_object_or_404(UserProfile, user_id=user_id)
 
     if request.method == 'POST':
-        form = UserProfileForm(request.POST, instance=user_profile)
-        if form.is_valid():
-            form.save()
-            return redirect('profile')  # Redirect to the user's profile page
+        user_form = CustomUserForm(request.POST, instance=user_profile.user)
+        profile_form = UserProfileForm(request.POST, instance=user_profile)
+        if user_form.is_valid() and profile_form.is_valid():
+            user_form.save()
+            profile_form.save()
+            return redirect('user_data_page')  # Redirect to the user's profile page
     else:
-        form = UserProfileForm(instance=user_profile)
+        user_form = CustomUserForm(instance=user_profile.user)
+        profile_form = UserProfileForm(instance=user_profile)
 
-    return render(request, 'single_user.html', {'form': form, 'user_profile': user_profile})
+    return render(request, 'single_user.html', {'user_form': user_form, 'profile_form': profile_form, 'user_profile': user_profile})

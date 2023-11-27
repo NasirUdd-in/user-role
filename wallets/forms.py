@@ -19,3 +19,9 @@ class UserProfileForm(forms.ModelForm):
     class Meta:
         model = UserProfile
         fields = ['bio', 'wallet_balance']
+        exclude = ['user']
+
+class CustomUserForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ['username', 'email', 'is_active']  
