@@ -15,8 +15,7 @@ class LoginForm(AuthenticationForm):
         fields = ['username', 'password']
 
 
-# class CustomUserChangeForm(UserChangeForm)
-#     class Meta:
-#         model = UserProfile
-#         fields = ('bio') 
-# s
+class UserProfileForm(forms.ModelForm):
+    class Meta:
+        model = UserProfile
+        fields = ['bio', 'wallet_balance']

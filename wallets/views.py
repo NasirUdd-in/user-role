@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404
 
 # Create your views here.
-from django.shortcuts import render, redirect
+# from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate
 from .forms import RegistrationForm, LoginForm
 from django.contrib.auth.decorators import login_required
@@ -14,6 +14,10 @@ from django.http import HttpResponseBadRequest
 from django.contrib.auth import logout
 
 # from .forms import CustomUserChangeForm
+
+from django.shortcuts import render, get_object_or_404, redirect
+from .models import UserProfile
+from .forms import UserProfileForm
 
 def register(request):
     if request.method == 'POST':
@@ -132,3 +136,17 @@ def user_logout(request):
 #         form = CustomUserChangeForm(instance=user)
 
 #     return render(request, 'single_user.html', {'form': form, 'user': user})
+
+
+def single_user(request, user_id):
+    user_profile = get_object_or_404(UserProfile, user_id=user_id)
+
+    if request.method == 'POST':
+        form = UserProfileForm(request.POST, instance=user_profile)
+        if form.is_valid():
+            form.save()
+            return redirect('profile')  # Redirect to the user's profile page
+    else:
+        form = UserProfileForm(instance=user_profile)
+
+    return render(request, 'single_user.html', {'form': form, 'user_profile': user_profile})

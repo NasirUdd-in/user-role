@@ -1,7 +1,7 @@
 <!-- user_details.html -->
-{% extends 'base.html' %}
+{% comment %} {% extends 'base.html' %} {% endcomment %}
 
- {% block content %}
+ {% comment %} {% block content %}
   <h2>User Details</h2>
   <p><strong>Username:</strong> {{ user.user.username }}</p>
   <p><strong>Email:</strong> {{ user.user.email }}</p>
@@ -9,7 +9,7 @@
   <p><strong>Bio:</strong> {{ user.bio }}</p>
   <p><strong>Bio:</strong> {{ user.id }}</p>
   <!-- Add more details as needed -->
-{% endblock %} 
+{% endblock %}  {% endcomment %}
 
 
 {% comment %} {% extends 'base.html' %}
@@ -23,8 +23,10 @@
   </form>
 {% endblock %} {% endcomment %}
 
- {% comment %} <form method="post">
+{% block content %}
+ <form method="post">
   {% csrf_token %}
   {{ form.as_p }}
   <button type="submit">Update</button>
-</form>  {% endcomment %}
+</form> 
+{% endblock %}

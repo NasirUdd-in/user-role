@@ -27,7 +27,7 @@
                     
                         <td scope="row"> <button type="submit"  class="btn btn-success">Update</button></td>
                         <td scope="row">
-                            <a href="{% url 'single_user' user_id=profile.id %}">Details</a>
+                            <a href="{% url 'single_user' user_id=profile.user.id %}">Details</a>
                         </td>
                     </tr>
                 </form>
