@@ -1,30 +1,33 @@
 {% extends 'base.html' %}
 {% block content %}
     <h2>User List</h2>
-    <form method="post" action="{% url 'update_user_is_active' %}">
-        {% csrf_token %}
-        <table>
-            <thead>
+   
+        <table class="table">
+            <thead  class="thead-dark">
                 <tr>
-                    <th>Username</th>
-                    <th>Email</th>
-                    <th>Id</th>
-                    <th>Is Active</th>
+                    <th scope="col">Username</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Id</th>
+                    <th scope="col">Update Status</th>
                 </tr>
             </thead>
             <tbody>
                 {% for profile in user_profiles  %}
+                <form method="post" action="{% url 'update_user_is_active' %}">
+                    {% csrf_token %}
                     <tr>
-                        <td>{{ profile.user.username }}</td>
-                        <td>{{ profile.user.email }}</td>
-                        <td>{{profile.user.id}}</td>
-                        <td>
+                        <td scope="row">{{ profile.user.username }}</td>
+                        <td scope="row">{{ profile.user.email }}</td>
+                        <td scope="row">{{profile.user.id}}</td>
+                        <td scope="row">
                             <input type="checkbox" name="user_ids" value="{{ profile.user.id }}" {% if profile.user.is_active %}checked{% endif %}>
                         </td>
+                        <td scope="row"> <button type="submit"  class="btn btn-success">Update</button></td>
                     </tr>
+                </form>
                 {% endfor %}
             </tbody>
         </table>
-        <button type="submit">Update Is Active</button>
-    </form>
+       
+   
 {% endblock %}
