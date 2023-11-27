@@ -22,6 +22,9 @@ from .forms import UserProfileForm, CustomUserForm
 
 from django.contrib.auth.forms import UserChangeForm
 
+def home(request):
+    return render(request, 'home.html') 
+
 def register(request):
     if request.method == 'POST':
         form = RegistrationForm(request.POST)

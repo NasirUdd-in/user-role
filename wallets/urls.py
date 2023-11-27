@@ -1,8 +1,9 @@
 from django.urls import path
-from .views import register, user_login, second_page,all_user, user_data_page,update_user_is_active, user_logout, single_user
+from .views import register, user_login, second_page,all_user, user_data_page,update_user_is_active, user_logout, single_user, home
 
 
 urlpatterns = [
+    path('', home, name='home'),
     path('register/', register, name='register'),
     path('login/', user_login, name='login'),
     # Add other paths as needed
