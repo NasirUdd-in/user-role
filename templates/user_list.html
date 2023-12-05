@@ -2,6 +2,12 @@
 {% block content %}
 <div class="container my-5">
     <h2>User List</h2>
+    <form class="form-group" method="get" action="{% url 'search_by_username' %}">
+        <label for="username">Search by Username:</label>
+        <input class="form-control my-3" type="text" name="username" value="{{ query }}">
+        <button class="btn btn-success" type="submit">Search</button>
+    </form>
+    
    
         <table class="table">
             <thead  class="thead-dark">
@@ -9,12 +15,15 @@
                     <th scope="col">Username</th>
                     <th scope="col">Email</th>
                     <th scope="col">Id</th>
+                    <th scope="col">Bio</th>
+                    <th scope="col">Balance</th>
                     <th scope="col">Status</th>
                     <th scope="col">Update Status</th>
-                    <th scope="col">Update</th>
+                    {% comment %} <th scope="col">Update</th> {% endcomment %}
                 </tr>
             </thead>
             <tbody>
+                {% if user_profiles %}
                 {% for profile in user_profiles  %}
                 <form method="post" action="{% url 'update_user_is_active' %}">
                     {% csrf_token %}
@@ -22,17 +31,24 @@
                         <td scope="row">{{ profile.user.username }}</td>
                         <td scope="row">{{ profile.user.email }}</td>
                         <td scope="row">{{profile.user.id}}</td>
+                        <td scope="row">{{profile.bio}}</td>
+                        <td scope="row">{{profile.wallet_balance}}</td>
                         <td scope="row">
                             <input type="checkbox" name="user_ids" value="{{ profile.user.id }}" {% if profile.user.is_active %}checked{% endif %}>
                         </td>
                     
-                        <td scope="row"> <button type="submit"  class="btn btn-success">Update</button></td>
+                        {% comment %} <td scope="row"> <button type="submit"  class="btn btn-success">Update</button></td> {% endcomment %}
                         <td scope="row">
-                            <a class="link-success" href="{% url 'single_user' user_id=profile.user.id %}">Upate</a>
+                            <a class="btn btn-success" href="{% url 'single_user' user_id=profile.user.id %}">Update</a>
                         </td>
                     </tr>
+                    
                 </form>
                 {% endfor %}
+                
+                {% else %}
+                <p>No results found.</p>
+            {% endif %}
             </tbody>
         </table>
     </div>

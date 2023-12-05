@@ -21,6 +21,12 @@ from .forms import UserProfileForm, CustomUserForm
 
 
 from django.contrib.auth.forms import UserChangeForm
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+
+
+from django.shortcuts import render
+
+from django.db.models import Q 
 
 def home(request):
     return render(request, 'home.html') 
@@ -82,9 +88,13 @@ def toggle_account_status(request):
 
     return render(request, 'toggle_account_status.html')
 
-def all_user(request):
-    user = User.objects.all()
-    return render(request, 'test.html', {'user':user})    
+# def all_user(request):
+#     user = User.objects.all()
+#     return render(request, 'test.html', {'user':user})   
+
+def all_userprofile(request):
+    userprofile = UserProfile.objects.all()
+    return render(request, 'test.html', {'userprofile':userprofile}) 
 
 
 def update_user_is_active(request):
@@ -188,3 +198,48 @@ def single_user(request, user_id):
         profile_form = UserProfileForm(instance=user_profile)
 
     return render(request, 'single_user.html', {'user_form': user_form, 'profile_form': profile_form, 'user_profile': user_profile})
+
+def search_by_username(request):
+    if 'username' in request.GET:
+        username = request.GET['username']
+        user_profiles = UserProfile.objects.filter(user__username__icontains=username)
+        return render(request, 'user_list.html', {'user_profiles': user_profiles, 'query': username})
+    else:
+        return render(request, 'user_list.html', {})
+# def search_by_username(request):
+#     template_name = 'user_list.html'
+#     page = request.GET.get('page', 1)
+#     per_page = 3  # Number of profiles to display per page
+
+#     if 'username' in request.GET:
+#         username = request.GET['username']
+#         user_profiles = UserProfile.objects.filter(user__username__icontains=username)
+        
+#         paginator = Paginator(user_profiles, per_page)
+#         try:
+#             user_profiles = paginator.page(page)
+#         except EmptyPage:
+#             user_profiles = paginator.page(paginator.num_pages)
+
+#         return render(request, template_name, {'user_profiles': user_profiles, 'query': username})
+#     else:
+#         return render(request, template_name, {})
+
+# def search_by_username(request):
+#     if 'username' in request.GET:
+#         username = request.GET['username']
+#         user_profiles = UserProfile.objects.filter(user__username__icontains=username)
+
+#         # Pagination
+#         page = request.GET.get('page', 1)
+#         paginator = Paginator(user_profiles, 3)  # Show 10 profiles per page
+#         try:
+#             user_profiles = paginator.page(page)
+#         except PageNotAnInteger:
+#             user_profiles = paginator.page(1)
+#         except EmptyPage:
+#             user_profiles = paginator.page(paginator.num_pages)
+
+#         return render(request, 'user_list.html', {'user_profiles': user_profiles, 'query': username})
+#     else:
+#         return render(request, 'user_list.html', {})

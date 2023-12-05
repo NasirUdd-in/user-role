@@ -14,4 +14,4 @@ class UserProfile(models.Model):
 class UserProfileForm(forms.ModelForm):
     class Meta:
         model = UserProfile
-        fields = ['bio', 'wallet_balance']
+        fields = ['bio', 'wallet_balance','user']
