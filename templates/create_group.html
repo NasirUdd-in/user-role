@@ -1,0 +1,14 @@
+<!-- create_group.html -->
+{% extends 'base.html' %}
+{% block content %}
+{% load crispy_forms_tags %}
+<div class="container">
+{% if perms.permissiongroup.view_permission_group %}
+<form method="post">
+    {% csrf_token %}
+    {{ form|crispy }}
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+{% endif %}
+</div>
+{% endblock %}

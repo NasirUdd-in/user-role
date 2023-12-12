@@ -15,6 +15,7 @@
                     <th scope="col">Username</th>
                     <th scope="col">Email</th>
                     <th scope="col">Id</th>
+                    <th scope="col">Role</th>
                     <th scope="col">Bio</th>
                     <th scope="col">Balance</th>
                     <th scope="col">Status</th>
@@ -31,6 +32,7 @@
                         <td scope="row">{{ profile.user.username }}</td>
                         <td scope="row">{{ profile.user.email }}</td>
                         <td scope="row">{{profile.user.id}}</td>
+                        <td scope="row">{{profile.user.groups}}</td>
                         <td scope="row">{{profile.bio}}</td>
                         <td scope="row">{{profile.wallet_balance}}</td>
                         <td scope="row">

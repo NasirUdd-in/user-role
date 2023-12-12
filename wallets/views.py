@@ -19,7 +19,6 @@ from django.shortcuts import render, get_object_or_404, redirect
 from .models import UserProfile
 from .forms import UserProfileForm, CustomUserForm
 
-
 from django.contrib.auth.forms import UserChangeForm
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
@@ -27,6 +26,10 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.shortcuts import render
 
 from django.db.models import Q 
+
+from django.shortcuts import render, redirect
+from django.contrib.auth.models import Group, Permission
+from django.contrib.contenttypes.models import ContentType
 
 def home(request):
     return render(request, 'home.html') 
@@ -67,6 +70,7 @@ def second_page(request):
     context = {'user_details': user_details}
     return render(request, 'details.html', context)
 
+@login_required
 @user_passes_test(lambda u: u.is_superuser)
 def user_data_page(request):
     try:
@@ -92,11 +96,12 @@ def toggle_account_status(request):
 #     user = User.objects.all()
 #     return render(request, 'test.html', {'user':user})   
 
+@login_required
 def all_userprofile(request):
     userprofile = UserProfile.objects.all()
     return render(request, 'test.html', {'userprofile':userprofile}) 
 
-
+@login_required
 def update_user_is_active(request):
     if request.method == 'POST':
         user_ids = request.POST.getlist('user_ids')
@@ -182,7 +187,7 @@ def user_logout(request):
 #         profile_form = UserProfileForm(instance=user_profile)
 
 #     return render(request, 'single_user.html', {'user_form': user_form, 'profile_form': profile_form, 'user_profile': user_profile})
-
+@login_required
 def single_user(request, user_id):
     user_profile = get_object_or_404(UserProfile, user_id=user_id)
 
@@ -198,7 +203,7 @@ def single_user(request, user_id):
         profile_form = UserProfileForm(instance=user_profile)
 
     return render(request, 'single_user.html', {'user_form': user_form, 'profile_form': profile_form, 'user_profile': user_profile})
-
+@login_required
 def search_by_username(request):
     if 'username' in request.GET:
         username = request.GET['username']
@@ -243,3 +248,50 @@ def search_by_username(request):
 #         return render(request, 'user_list.html', {'user_profiles': user_profiles, 'query': username})
 #     else:
 #         return render(request, 'user_list.html', {})
+
+
+def Nasir(request):
+    hello = UserProfile.objects.all()
+    print(hello)
+
+# def process_permission_form(request):
+#     if request.method == 'POST':
+#         form = PermissionSelectionForm(request.POST)
+#         if form.is_valid():
+#             group = form.cleaned_data['group']
+#             permissions = form.cleaned_data['permissions']
+
+#             # Assign selected permissions to the group
+#             for permission in permissions:
+#                 CustomPermission.objects.create(group=group, permission=permission)
+
+#             return redirect('success_page')  # Redirect to a success page
+#     else:
+#         form = PermissionSelectionForm()
+
+#     return render(request, 'create_group.html', {'form': form})
+
+
+from django.shortcuts import render, redirect
+from .forms import GroupPermissionForm
+
+@login_required
+def create_group(request):
+    if request.method == 'POST':
+        form = GroupPermissionForm(request.POST)
+        if form.is_valid():
+            group = form.save()
+            return redirect('create_group')  # Redirect to a success page
+    else:
+        form = GroupPermissionForm()
+
+    return render(request, 'create_group.html', {'form': form})
+
+
+
+from .models import Product
+
+@login_required
+def product_list(request):
+    products = Product.objects.all()
+    return render(request, 'product_list.html', {'products': products})

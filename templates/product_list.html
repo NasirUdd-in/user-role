@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>Product List</h1>
+    <ul>
+        {% if perms.products.view_product %}
+        {% for product in products %}
+            <li>{{ product.name }} - ${{ product.price }}</li>
+        {% endfor %}
+        {% endif %}
+    </ul>
+
+
+
+{% endblock %}
