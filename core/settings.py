@@ -26,7 +26,7 @@ SECRET_KEY = "django-insecure-gtq-$vq=8r5*-c21wg6qdeyxmhuw#nv2-n5ts*jqz#zpgu8va2
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', '192.168.0.134','10.0.0.52']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', '192.168.1.181','10.0.0.52']
 
 
 # Application definition
@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     "wallets",
     "crispy_forms",
     'crispy_bootstrap5', 
+    'chartjs',
     
 ]
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"

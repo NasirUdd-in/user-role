@@ -1,0 +1,24 @@
+<!-- Hero -->
+{% extends 'base.html' %}
+{% block content %}
+{% if perms.products.view_product %}
+<div class="container d-flex flex-wrap align-items-center ">
+{% for product in products %}
+
+    <div class="card w-25 m-2" >
+        <img class="card-img-top" src="https://store.bdtask.com/assets/img/modules/thumbs/qrapp.jpg" alt="Card image cap">
+        <div class="card-body">
+          <h5 class="card-title">{{product.name}}</h5>
+          <p class="card-text">{{product.description}}</p>
+          {% comment %} <p class="card-text">{{product.id}}</p> {% endcomment %}
+          {% if not product.is_active %}
+          <a href="{% url 'activate_product' product.id %}" class="btn btn-primary">Activate</a>
+          {%endif%}
+        </div>
+      </div>
+
+
+  {% endfor %}
+</div>
+  {% endif %}
+{% endblock content %}
