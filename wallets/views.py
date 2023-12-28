@@ -31,6 +31,8 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.models import Group, Permission
 from django.contrib.contenttypes.models import ContentType
 
+from django.http import HttpResponseRedirect
+
 def home(request):
     return render(request, 'home.html') 
 
@@ -295,3 +297,32 @@ from .models import Product
 def product_list(request):
     products = Product.objects.all()
     return render(request, 'product_list.html', {'products': products})
+
+@login_required
+def module_list(request):
+    products = Product.objects.all()
+    return render(request, 'module_list.html' , {'products': products})
+
+
+def activate_product(request, product_id):
+    # Get the product instance
+    product = get_object_or_404(Product, pk=product_id)
+
+    # Activate the product by setting is_active to True
+    product.is_active = True
+    product.save()
+
+    # Redirect back to the product list or wherever you want
+    return HttpResponseRedirect('/module-list/')
+
+
+def chart_view(request):
+    products = Product.objects.all()
+    prices = [product.price for product in products]
+
+    context = {
+        'labels': [product.name for product in products],
+        'data': prices,
+    }
+
+    return render(request, 'chart.html', context)

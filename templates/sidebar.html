@@ -14,54 +14,8 @@
                         {% comment %} <li><i class="fa fa-eye" style="color: darkblue"></i><a >View</a></li> {% endcomment %}
                     </ul>
                 </li> 
-                {% comment %} {% endif %} {% endcomment %}
-                {% comment %} <li class="menu-item-has-children dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-users"></i>Buyer</a>
-                    <ul class="sub-menu children dropdown-menu">
-                        <li><i class="fa fa-plus-circle" style="color: darkblue"></i><a href="{% url 'create-buyer' %}">Add</a></li>
-                        <li><i class="fa fa-eye" style="color: darkblue"></i><a href="{% url 'buyer-list' %}">View</a></li>
-                    </ul>
-                </li> {% endcomment %}
+          
 
-                {% comment %} <li class="menu-item-has-children dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-calendar"></i>Season</a>
-                    <ul class="sub-menu children dropdown-menu">
-                        <li><i class="fa fa-plus-circle" style="color: darkblue"></i><a href="{% url 'create-season' %}">Add</a></li>
-                        <li><i class="fa fa-eye" style="color: darkblue"></i><a href="{% url 'season-list' %}">View</a></li>
-                    </ul>
-                </li> {% endcomment %}
-
-                {% comment %} <li class="menu-item-has-children dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-tags"></i>Category</a>
-                    <ul class="sub-menu children dropdown-menu">
-                        <li><i class="fa fa-plus-circle" style="color: darkblue"></i><a href="{% url 'create-drop' %}">Add</a></li>
-                        <li><i class="fa fa-eye" style="color: darkblue"></i><a href="{% url 'drop-list' %}">View</a></li>
-                    </ul>
-                </li> {% endcomment %}
-
-                {% comment %} <li class="menu-item-has-children dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-list"></i>Product</a>
-                    <ul class="sub-menu children dropdown-menu">
-                        <li><i class="fa fa-plus-circle" style="color: darkblue"></i><a href="{% url 'create-product' %}">Add</a></li>
-                        <li><i class="fa fa-eye" style="color: darkblue"></i><a href="{% url 'product-list' %}">View</a></li>
-                    </ul>
-                </li> {% endcomment %}
-{% comment %} 
-                <li class="menu-item-has-children dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-shopping-cart"></i>Order</a>
-                    <ul class="sub-menu children dropdown-menu">
-                        <li><i class="fa fa-plus-circle" style="color: darkblue"></i><a href="{% url 'create-order' %}">Add</a></li>
-                        <li><i class="fa fa-eye" style="color: darkblue"></i><a href="{% url 'order-list' %}">View</a></li>
-                    </ul>
-                </li> {% endcomment %}
-
-                {% comment %} <li class="menu-item-has-children dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-truck"></i>Delivery</a>
-                    <ul class="sub-menu children dropdown-menu">
-                        <li><i class="fa fa-plus-circle" style="color: darkblue"></i><a href="{% url 'create-delivery' %}">Add</a></li>
-                        <li><i class="fa fa-eye" style="color: darkblue"></i><a href="{% url 'delivery-list' %}">View</a></li>
-                    </ul>
-                </li> {% endcomment %}
                 <li class="menu-item-has-children dropdown">
                     <a href="{% url 'second_page' %}" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-user"></i>My Profile</a>
                     <ul class="sub-menu children dropdown-menu">
@@ -101,10 +55,11 @@
                     </ul>
                 </li>
                 <li class="menu-item-has-children dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-file"></i>Report</a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-file"></i>Module</a>
                     <ul class="sub-menu children dropdown-menu">
-                        <li><i class="fa fa-plus-circle" style="color: darkblue"></i><a href="">Profit/loss Report</a></li>
-                        <li><i class="fa fa-eye" style="color: darkblue"></i><a href="">Balance Sheet</a></li>
+                        <li><i class="fa fa-plus-circle" style="color: darkblue"></i><a href="{% url 'module_list' %}">add module</a></li>
+                        
+                      
                     </ul>
                 </li>
             </ul>
